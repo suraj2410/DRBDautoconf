@@ -100,8 +100,8 @@ rm -rf /root/disks.txt || true >> $LOGFILE 2>&1
 
 read -p "Do you wish to use all the above shown disk for drbd paritions?
 Answer Y or N where:
-'Y' means all these disk without the OS installations iwll be partitioned 100% for DRBD
-'N' you can input the required disks in the next questions
+'Y' means all these disk without the OS installations will be partitioned 100% for DRBD
+'N' you can input the required disks in the next questions which will be partitioned 100% for DRBD
 Please make your selection now:" SELECTION
 
 if [ "$SELECTION" = "Y" ]
@@ -151,13 +151,13 @@ do
 
 echo -e "Going to partition $DISKS with 100% disk space..\n"
 
-parted $DISKS --script mklabel gpt || true 
+parted $DISKS --script mklabel gpt || true #Making labels as GPT for big partitions
 
 parted $DISKS --script rm 1 || true >> $LOGFILE 2>&1
 
 parted $DISKS --script rm 2 || true >> $LOGFILE 2>&1
 
-parted $DISKS --script mkpart primary ext4 0% 100% 
+parted $DISKS --script mkpart primary ext4 0% 100% # Using 100% Disk space for the partition
 
 echo -e "Creating DRBD conf file for the device $DISKS: \n"
 
@@ -171,7 +171,7 @@ echo "resource drbd${COUNT} {
         }
         net {
                 cram-hmac-alg sha1;
-                shared-secret "fdc666";
+                shared-secret "abc666";
                 allow-two-primaries;
                 after-sb-0pri discard-zero-changes;
                 after-sb-1pri discard-secondary;
