@@ -1,5 +1,5 @@
 # DRBDautoconf
-CentOS 6.x based DRBD auto install and configuration of files for underlying HDD's to use.
+CentOS 6.x based DRBD version 8.4 https://docs.linbit.com auto install and configuration of files for underlying HDD's to use.
 
 This script needs to be deployed on both the systems that you intend to use for DRBD purposes.
 
